@@ -17,3 +17,4 @@ git tag %new_version%
 git push origin %new_version%
 
 echo New version: %new_version%
+ 
