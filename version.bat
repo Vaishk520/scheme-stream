@@ -1,20 +1,14 @@
 @echo off
-REM Get the latest Git tag (version)
-for /f "tokens=*" %%i in ('git describe --tags --abbrev=0 2^>nul') do set latest_tag=%%i
+setlocal enabledelayedexpansion
 
-REM If no tag exists, start from v0.0.1
-if "%latest_tag%"=="" (
-    set new_version=v0.0.1
-) else (
-    for /f "tokens=1,2,3 delims=." %%a in ("%latest_tag:~1%") do (
-        set /a patch=%%c+1
-        set new_version=v%%a.%%b.!patch!
-    )
+for /f "tokens=1,2,3 delims=." %%a in ('git describe --tags --abbrev=0 2^>nul') do (
+    set /a PATCH=%%c+1
+    set NEW_VERSION=v%%a.%%b.!PATCH!
 )
 
-REM Create and push the new tag
-git tag %new_version%
-git push origin %new_version%
+if "%NEW_VERSION%"=="" set NEW_VERSION=v1.0.0
 
-echo New version: %new_version%
- 
+git tag %NEW_VERSION%
+git push origin %NEW_VERSION%
+
+echo Updated version: %NEW_VERSION%
