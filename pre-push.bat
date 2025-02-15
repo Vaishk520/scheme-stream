@@ -1,3 +1,2 @@
 @echo off
-call "%~dp0..\..\version.bat"
-git push origin --tags
+call "%~dp0..\..\version.bat
