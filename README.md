@@ -1,1 +1,1 @@
-This is a test for auto versioning.
+This is a test for versioning.
