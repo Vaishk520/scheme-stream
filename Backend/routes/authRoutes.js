@@ -43,6 +43,7 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.header('Authorization', token).send({ token, user });
+      main
     } catch (err) {
         console.error('Error in login:', err);
         res.status(500).send('Server Error');
