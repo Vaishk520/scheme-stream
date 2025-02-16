@@ -17,7 +17,7 @@ echo !new_version! > version.txt
 git add version.txt
 git commit -m "Auto-incremented version to !new_version!"
 git tag -d v!new_version! 2>NUL
-git tag -a v!new_version! -m "Version !new_version!"
+git tag -a v!new_version! -m "!commit_message!"
 
 git push origin v!new_version!
 
