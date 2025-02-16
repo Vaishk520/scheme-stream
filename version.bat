@@ -1,14 +1,21 @@
 @echo off
 setlocal enabledelayedexpansion
 
-for /f "tokens=1,2,3 delims=." %%a in ('git describe --tags --abbrev=0 2^>nul') do (
-    set /a PATCH=%%c+1
-    set NEW_VERSION=v%%a.%%b.!PATCH!
+set /p version=<version.txt
+
+for /f "tokens=1-3 delims=." %%a in ("%version%") do (
+    set /A major=%%a
+    set /A minor=%%b
+    set /A patch=%%c + 1
 )
 
-if "%NEW_VERSION%"=="" set NEW_VERSION=v1.0.0
+set new_version=!major!.!minor!.!patch!
 
-git tag %NEW_VERSION%
-git push origin %NEW_VERSION%
+echo !new_version! > version.txt
 
-echo Updated version: %NEW_VERSION%
+git add version.txt
+git commit -m "Auto-incremented version to !new_version!"
+git tag -a v!new_version! -m "Version !new_version!"
+
+echo New version set to !new_version!
+endlocal
