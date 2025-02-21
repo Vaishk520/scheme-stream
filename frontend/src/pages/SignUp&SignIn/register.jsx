@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState("");  
   const navigate = useNavigate();  
 
-  const API_URL = import.meta.env.VITE_APP_API_URL || "http://localhost:5001"; // Use Vite env variable or fallback
+  const API_URL = import.meta.env.VITE_APP_API_URL || "https://scheme-stream-backend.vercel.app"; // Use Vite env variable or fallback
   
 
   const handleRegister = async (e) => {
