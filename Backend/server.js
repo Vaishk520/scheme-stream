@@ -17,6 +17,14 @@ console.log("✅ Express app initialized");
 app.use(express.json());
 app.use(cors());
 
+//configure CORS
+const corsOptions ={
+  origin: process.env.REACT_APP_API_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
+
 // Middleware for logging incoming requests
 app.use((req, res, next) => {
   console.log(`Incoming Request: ${req.method} ${req.url}`);
@@ -62,6 +70,11 @@ app.use((err, req, res, next) => {
 
 // Set the port
 const PORT = process.env.PORT || 5001;
+
+// Root endpoint
+app.get("/", (req, res)=> {
+  res.send("welcome to the product API");
+});
 
 // Start the server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
