@@ -28,7 +28,7 @@ const Register = () => {
       console.log("Registration success:", request.data); // Debugging success
       navigate("/login");  
     } catch (err) {
-      console.log(request)
+      console.log(request.data)
 
       console.error("Registration error:", err.response?.data || err.message);  
       setError(err.response?.data?.message || "Registration failed");  
