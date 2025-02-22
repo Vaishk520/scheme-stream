@@ -10,7 +10,7 @@ const Register = () => {
   const [error, setError] = useState("");  
   const navigate = useNavigate();  
 
-  const API_URL = import.meta.env.VITE_API_URL || "https://localhost:5001"; // Use Vite env variable or fallback
+  const API_URL = import.meta.env.VITE_API_URL; // Use Vite env variable or fallback
   console.log("API URL:", API_URL); // Debugging API URL
 
   const handleRegister = async (e) => {
@@ -21,14 +21,14 @@ const Register = () => {
       return;
     }
 
-    try {l
-      const response = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
+    try {
+      const request = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
 
-      console.log("Registration success:", response.data); // Debugging success
+      console.log("Registration success:", request.data); // Debugging success
       navigate("/login");  
     } catch (err) {
-      console.error("Registration error:", err.response?.data || err.message);  
-      setError(err.response?.data?.message || "Registration failed");  
+      console.error("Registration error:", err.request?.data || err.message);  
+      setError(err.request?.data?.message || "Registration failed");  
     }
   };
 
