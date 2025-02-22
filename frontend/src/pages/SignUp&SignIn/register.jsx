@@ -23,6 +23,7 @@ const Register = () => {
 
     try {
       const request = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
+      console.log(request)
 
       console.log("Registration success:", request.data); // Debugging success
       navigate("/login");  
