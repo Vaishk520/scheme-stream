@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-        const API_URL = import.meta.env.VITE_API_URL || "https://scheme-stream-local.vercel.app"; // Use Vite env variable or fallback
+        const API_URL = import.meta.env.VITE_API_URL || "https://localhost:5001"; // Use Vite env variable or fallback
         const response = await axios.post(`${API_URL}/api/auth/login`, { email, password });
 
         const { token, user } = response.data;
