@@ -23,14 +23,14 @@ const Register = () => {
 
     try {
       const request = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
-      console.log(request)
+      console.log(request);
 
       console.log("Registration success:", request.data); // Debugging success
       navigate("/login");  
     } catch (err) {
-      console.log(request.data)
+      
 
-      console.error("Registration error:", err.response?.data || err.message);  
+      console.error("Registration error:", err.response?.data || err.message);  // Log the actual error object
       setError(err.response?.data?.message || "Registration failed");  
     }
   };
