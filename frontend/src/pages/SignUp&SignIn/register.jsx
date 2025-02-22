@@ -15,26 +15,31 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();  
-
+  
     if (!role) {
-      setError("Please select a role.");  
+      setError("Please select a role.");
       return;
     }
-
+  
     try {
-      const request = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
-      console.log(request);
-
-      console.log("Registration success:", request.data); // Debugging success
-      navigate("/login");  
+      const response = await axios.post(`${API_URL}/api/auth/register`, { email, password, role });
+  
+      if (response.status === 204) {
+        // Handle the case where there's no content but registration was successful
+        console.log("Registration successful, no content returned.");
+        navigate("/login");  
+      } else {
+        // If you still expect content, log it here
+        console.log("Registration success:", response.data);
+        navigate("/login");
+      }
     } catch (err) {
-      
-
-      console.error("Registration error:", err.response?.data || err.message);  // Log the actual error object
-      setError(err.response?.data?.message || "Registration failed");  
+      // Log error response or fallback to error message
+      console.error("Registration error:", err.response?.data || err.message);  
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 to-indigo-600">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
